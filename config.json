@@ -1,6 +1,6 @@
 {
     "button_matrix": {
-      "rows_pins": [5, 6, 13, 19],
-      "cols_pins": [12, 16, 20, 21]
+      "rows_pins": [15,14],
+      "cols_pins": [2,3]
     }
   }

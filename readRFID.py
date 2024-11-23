@@ -4,15 +4,17 @@ from mfrc522 import SimpleMFRC522
 from button_service import ButtonMatrixService
 import json
 from text_to_speech_service import TextToSpeechService
+import os
 
 
 
 
 
 
+
+GPIO.setmode(GPIO.BCM)
 
 # Initialisation des pins GPIO et du lecteur RFID
-#GPIO.setmode(GPIO.BCM)
 reader = SimpleMFRC522()
 
 
@@ -35,9 +37,10 @@ try:
   while True :
       #print("Approchez votre carte RFID du lecteur")
       #id, text = reader.read()
-      id = reader.read_id()
-      print(f"ID de la carte: |{id}|")
-      print(f"")
+      id = reader.read_id_no_block()
+
+      #print(f"ID de la carte: |{id}|")
+      #print(f"")
 
       if str(id) == "584197378814":
         TextToSpeechService.lire_texte("Salut Robin! Comment ça va?")
@@ -46,12 +49,16 @@ try:
       if str(id) == "783538561520":
         TextToSpeechService.lire_texte("Salut Jean-Mi! Comment ça va?")
 
+
       # Détecter les boutons pressés
       pressed = ButtonMatrixService.detect_buttons()
       if pressed:
         print(f"Boutons pressés : {pressed}")
+        if 1 in pressed:
+          os.system("mpg123 mib.mp3")
+ 
 
-      time.sleep(0.3)
+      time.sleep(0.1)
       
 except KeyboardInterrupt:
     print("Opération interrompue.")

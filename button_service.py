@@ -15,7 +15,7 @@ class ButtonMatrixService:
         cls.cols_pins = cols_pins
 
         # Configurer les GPIO
-        GPIO.setmode(GPIO.BCM)
+       # GPIO.setmode(GPIO.BCM)
         cls._setup_matrix()
 
     @classmethod
